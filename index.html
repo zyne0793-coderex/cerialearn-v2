@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CeriaLearn — Main. Belajar. Skor.</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f7f8fc;color:#1f2937}
+header{padding:18px 24px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between}
+main{max-width:900px;margin:auto;padding:48px 24px}
+.hero{text-align:center;padding:40px 0}
+h1{font-size:52px;margin:0 0 14px}
+p{line-height:1.5}
+.btn{padding:14px 22px;border:0;border-radius:12px;background:#111827;color:#fff;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:30px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:22px}
+.option{display:block;width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #d1d5db;background:#fff;text-align:left}
+footer{text-align:center;padding:30px;color:#6b7280}
+</style>
+</head>
+<body>
+<header><strong>CeriaLearn</strong><span>Main. Belajar. Skor.</span></header>
+<main>
+<section class="hero">
+<h1>Ulang kaji jadi permainan.</h1>
+<p>Latihan Matematik sekolah rendah yang ringkas dan menyeronokkan.</p>
+<button class="btn" onclick="document.getElementById('quiz').style.display='block'">Cuba Kuiz</button>
+</section>
+<section class="grid">
+<div class="card"><h3>Quick Quiz</h3><p>Soalan pantas 5–10 minit.</p></div>
+<div class="card"><h3>Target</h3><p>Kumpul XP dan capai sasaran.</p></div>
+<div class="card"><h3>Adventure</h3><p>Belajar ikut tahap permainan.</p></div>
+</section>
+<section id="quiz" class="card" style="display:none;margin-top:30px">
+<h3>RM5 + RM2 = ?</h3>
+<button class="option" onclick="show(false)">RM6</button>
+<button class="option" onclick="show(true)">RM7</button>
+<button class="option" onclick="show(false)">RM8</button>
+<p id="result"></p>
+</section>
+</main>
+<footer>© CeriaLearn</footer>
+<script>
+function show(ok){document.getElementById('result').textContent=ok?'Betul! +10 XP 🎉':'Cuba lagi.'}
+</script>
+</body>
+</html>
