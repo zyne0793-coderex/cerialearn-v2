@@ -4,188 +4,179 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CeriaLearn — Main. Belajar. Skor.</title>
-<meta name="description" content="Ulang kaji sekolah rendah jadi permainan.">
+<meta name="description" content="CeriaLearn: latihan Matematik Tahun 1, 2 dan 3 berpandukan kurikulum KPM.">
 <style>
-:root{--bg:#f6f8ff;--card:#fff;--text:#182033;--muted:#687085;--line:#e7eaf1;--accent:#5b6cff;--ok:#137a4a;--bad:#b33a3a}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
-header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
-.brand{font-size:22px;font-weight:800}.tag{color:var(--muted);font-size:14px}
-main{max-width:1050px;margin:auto;padding:28px 18px 48px}
-.hero{background:linear-gradient(135deg,#fff,#eef1ff);border:1px solid var(--line);border-radius:24px;padding:34px;margin-bottom:22px}
-.hero h1{font-size:clamp(34px,6vw,58px);margin:0 0 10px;line-height:1}.hero p{color:var(--muted);font-size:18px}
-.row{display:flex;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer}
-.btn.primary{background:var(--accent);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
-.stat b{font-size:26px;display:block}.stat span{color:var(--muted);font-size:13px}
-.section-title{margin:26px 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
-.card h3{margin:0 0 8px}.card p{color:var(--muted);margin:0 0 14px}
-.grade,.topic{cursor:pointer;transition:.18s}.grade:hover,.topic:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,34,60,.08)}
-.active{outline:3px solid #cfd4ff}
-.hidden{display:none!important}
-.quiz{max-width:760px;margin:24px auto}.qmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
-.question{font-size:28px;font-weight:800;margin:18px 0}.option{width:100%;text-align:left;padding:14px 16px;margin:9px 0;border:1px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-size:16px}
-.option:hover{border-color:#b9c0ff}.feedback{margin-top:14px;font-weight:700}.ok{color:var(--ok)}.bad{color:var(--bad)}
-.progress{height:10px;background:#e9ecf7;border-radius:999px;overflow:hidden;margin:14px 0}.bar{height:100%;background:var(--accent);width:0%}
-.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.price{font-size:30px;font-weight:800}.muted{color:var(--muted)}
-.loginbox{display:grid;grid-template-columns:1fr 1fr;gap:10px}.loginbox input{padding:12px;border:1px solid var(--line);border-radius:10px}
-footer{text-align:center;color:var(--muted);padding:24px}
-@media(max-width:640px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.loginbox{grid-template-columns:1fr}.hero{padding:24px}.question{font-size:23px}}
+:root{--bg:#fff8ee;--card:#fff;--ink:#26334d;--muted:#6b7280;--purple:#7157e8;--pink:#ff79a8;--mint:#57c9a4;--yellow:#ffd967;--line:#ebe6f5;}
+*{box-sizing:border-box} body{margin:0;font-family:Nunito,Inter,system-ui,Arial,sans-serif;background:radial-gradient(circle at top,#fffdf5,var(--bg));color:var(--ink)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffd96755 1px,transparent 1px);background-size:24px 24px;opacity:.35}
+header{position:sticky;top:0;z-index:20;background:#ffffffeb;backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:900;font-size:24px} .brand span{color:var(--purple)} .small{font-size:13px;color:var(--muted)}
+main{max-width:1100px;margin:auto;padding:24px 16px 60px;position:relative;z-index:1}
+.hero{border-radius:28px;padding:34px;background:linear-gradient(135deg,#fff,#f1ecff 55%,#fff3c8);border:1px solid var(--line);box-shadow:0 16px 40px #6b5fd014;overflow:hidden;position:relative}
+.hero:after{content:"⭐";position:absolute;right:6%;top:14%;font-size:64px;animation:float 2.8s ease-in-out infinite}
+.hero h1{font-size:clamp(38px,7vw,68px);line-height:.95;margin:0 0 14px} .hero p{font-size:18px;color:var(--muted);max-width:650px}
+.btn{border:0;border-radius:16px;padding:13px 18px;font-weight:900;cursor:pointer;transition:.18s;box-shadow:0 5px 0 #00000012}
+.btn:hover{transform:translateY(-2px)} .btn:active{transform:translateY(2px);box-shadow:none}
+.primary{background:var(--purple);color:#fff} .secondary{background:#fff;color:var(--ink);border:1px solid var(--line)} .pink{background:var(--pink);color:#fff}
+.row{display:flex;gap:10px;flex-wrap:wrap} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 8px 24px #453b7710}
+.card h3{margin:0 0 8px} .muted{color:var(--muted)} .section{margin-top:26px}
+.grade,.topic{cursor:pointer;transition:.2s;position:relative;overflow:hidden} .grade:hover,.topic:hover{transform:translateY(-4px) rotate(-.3deg)} .selected{outline:4px solid #cfc4ff;background:#faf8ff}
+.badge{display:inline-block;border-radius:999px;padding:5px 9px;background:#f1ecff;color:var(--purple);font-size:12px;font-weight:900}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0} .stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;text-align:center} .stat b{display:block;font-size:24px}
+.quizwrap{max-width:780px;margin:28px auto} .progress{height:14px;background:#eee8fa;border-radius:999px;overflow:hidden} .bar{height:100%;background:linear-gradient(90deg,var(--mint),var(--purple));width:0;transition:.35s}
+.question{font-size:clamp(24px,5vw,36px);font-weight:900;margin:22px 0;text-align:center} .option{width:100%;border:2px solid #ece8f5;background:#fff;padding:15px 16px;border-radius:16px;margin:8px 0;text-align:left;font-weight:800;font-size:16px;cursor:pointer;transition:.15s} .option:hover{transform:scale(1.01);border-color:#cfc4ff}
+.feedback{min-height:70px;margin-top:14px;text-align:center;font-weight:900;font-size:18px} .correctAnim{font-size:46px;animation:pop .55s ease} .wrongAnim{font-size:54px;animation:wobble .7s ease}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:100;overflow:hidden} .confetti i{position:absolute;top:-20px;font-style:normal;animation:fall 1.6s linear forwards}
+.hidden{display:none!important} .adminPanel{background:linear-gradient(135deg,#fff,#eefbf6);border:2px dashed var(--mint)} .unlock{background:#effdf8;color:#16765b;padding:10px;border-radius:12px;font-weight:800}
+.price{font-size:30px;font-weight:900} .paybtn{width:100%;margin-top:10px}
+footer{text-align:center;color:var(--muted);padding:30px}
+@keyframes pop{0%{transform:scale(.5)}70%{transform:scale(1.25)}100%{transform:scale(1)}} @keyframes wobble{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}} @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.2}} @keyframes float{50%{transform:translateY(-12px) rotate(8deg)}}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)} .hero:after{font-size:42px;opacity:.75}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+<div id="confetti" class="confetti"></div>
 <header>
-<div class="brand">CeriaLearn</div>
-<div class="tag">Main. Belajar. Skor.</div>
+<div class="brand">Ceria<span>Learn</span></div>
+<div class="row"><button class="btn secondary" onclick="showAdminLogin()">Admin</button></div>
 </header>
 <main>
 <section class="hero">
-<h1>Ulang kaji jadi permainan.</h1>
-<p>Pilih tahun, pilih topik, jawab soalan dan kumpul XP.</p>
-<div class="row">
-<button class="btn primary" onclick="scrollToId('learn')">Mula Belajar</button>
-<button class="btn secondary" onclick="scrollToId('login')">Log Masuk</button>
-</div>
+<span class="badge">Matematik KPM • Tahun 1–3</span>
+<h1>Belajar. Main. Menang! 🌈</h1>
+<p>Kuiz ikut topik, ganjaran XP, bunyi lembut, animasi comel dan kemajuan pembelajaran untuk murid sekolah rendah.</p>
+<div class="row"><button class="btn primary" onclick="go('learn')">Mula Belajar 🚀</button><button class="btn secondary" onclick="go('pricing')">Pelan Premium</button></div>
 </section>
 
 <section class="stats">
-<div class="stat"><b id="xpStat">0</b><span>XP</span></div>
-<div class="stat"><b id="streakStat">0</b><span>Streak</span></div>
-<div class="stat"><b id="levelStat">1</b><span>Level</span></div>
+<div class="stat"><b id="xp">0</b><span>⭐ XP</span></div>
+<div class="stat"><b id="streak">0</b><span>🔥 Streak</span></div>
+<div class="stat"><b id="level">1</b><span>🏆 Level</span></div>
+<div class="stat"><b id="stars">0</b><span>🌟 Bintang</span></div>
 </section>
 
-<section id="login" class="card">
-<h2>Log Masuk Pelajar</h2>
-<p class="muted">Boleh guna Demo Mode sekarang. Supabase akan digunakan apabila env Vercel disambungkan.</p>
-<div class="loginbox">
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Kata laluan">
+<section id="learn" class="section">
+<h2>1. Pilih Tahun</h2>
+<div class="grid" id="grades">
+<div class="card grade" onclick="selectGrade(1,this)"><h3>🎈 Tahun 1</h3><p class="muted">Asas nombor, operasi, wang, masa, ukuran, bentuk dan data.</p></div>
+<div class="card grade" onclick="selectGrade(2,this)"><h3>🚀 Tahun 2</h3><p class="muted">Nombor hingga 1000, operasi, pecahan, wang dan topik lanjutan.</p></div>
+<div class="card grade" onclick="selectGrade(3,this)"><h3>🧠 Tahun 3</h3><p class="muted">Nombor hingga 10 000, operasi, perpuluhan asas, ukuran dan data.</p></div>
 </div>
-<div class="row" style="margin-top:10px">
-<button class="btn primary" onclick="loginSupabase()">Log Masuk</button>
-<button class="btn secondary" onclick="demoLogin()">Demo Mode</button>
-</div>
-<p id="loginMsg" class="muted"></p>
+
+<h2 class="section">2. Pilih Topik</h2>
+<div id="topicGrid" class="grid"></div>
 </section>
 
-<section id="learn">
-<h2 class="section-title">1. Pilih Tahun</h2>
-<div class="grid">
-<div class="card grade" onclick="selectGrade(1,this)"><h3>Tahun 1</h3><p>Nombor, wang dan masa asas.</p></div>
-<div class="card grade" onclick="selectGrade(2,this)"><h3>Tahun 2</h3><p>Operasi, wang, masa dan darab.</p></div>
-<div class="card grade" onclick="selectGrade(3,this)"><h3>Tahun 3</h3><p>Operasi, pecahan dan masalah harian.</p></div>
-</div>
-
-<h2 class="section-title">2. Pilih Topik</h2>
-<div class="grid" id="topics">
-<div class="card topic" data-topic="Nombor & Operasi" onclick="selectTopic(this)"><h3>Nombor & Operasi</h3><p>Tambah dan tolak.</p></div>
-<div class="card topic" data-topic="Wang" onclick="selectTopic(this)"><h3>Wang</h3><p>RM dan sen.</p></div>
-<div class="card topic" data-topic="Masa" onclick="selectTopic(this)"><h3>Masa</h3><p>Jam dan waktu.</p></div>
-<div class="card topic" data-topic="Darab & Bahagi" onclick="selectTopic(this)"><h3>Darab & Bahagi</h3><p>Latihan operasi asas.</p></div>
-<div class="card topic" data-topic="Pecahan" onclick="selectTopic(this)"><h3>Pecahan</h3><p>Separuh, suku dan pecahan mudah.</p></div>
-</div>
-<div class="row" style="margin-top:16px"><button class="btn primary" onclick="startQuiz()">Mula Kuiz 10 Soalan</button></div>
-</section>
-
-<section id="quizSection" class="quiz card hidden">
-<div class="qmeta"><span id="quizLabel"></span><span id="qCount"></span></div>
-<div class="progress"><div class="bar" id="bar"></div></div>
-<div class="question" id="questionText"></div>
+<section id="quiz" class="card quizwrap hidden">
+<div class="row" style="justify-content:space-between"><span id="quizTitle" class="badge"></span><span id="count" class="small"></span></div>
+<div class="progress" style="margin-top:12px"><div id="bar" class="bar"></div></div>
+<div id="question" class="question"></div>
 <div id="options"></div>
 <div id="feedback" class="feedback"></div>
-<button id="nextBtn" class="btn primary hidden" onclick="nextQuestion()" style="margin-top:14px">Seterusnya</button>
+<div style="text-align:center"><button id="next" class="btn primary hidden" onclick="nextQuestion()">Soalan Seterusnya ➜</button></div>
 </section>
 
-<section id="resultSection" class="card hidden">
-<h2>Keputusan Kuiz</h2>
-<p id="resultText"></p>
-<div class="row">
-<button class="btn primary" onclick="restartQuiz()">Main Lagi</button>
-<button class="btn secondary" onclick="scrollToId('learn')">Pilih Topik Lain</button>
+<section id="result" class="card quizwrap hidden" style="text-align:center">
+<div style="font-size:64px">🏆</div><h2>Hebat!</h2><p id="resultText" style="font-size:20px;font-weight:900"></p>
+<div class="row" style="justify-content:center"><button class="btn primary" onclick="restart()">Main Lagi</button><button class="btn secondary" onclick="go('learn')">Pilih Topik Lain</button></div>
+</section>
+
+<section id="pricing" class="section">
+<h2>Pelan CeriaLearn</h2>
+<div class="grid">
+<div class="card"><span class="badge">Free</span><h3>Belajar Percuma</h3><div class="price">RM0</div><p class="muted">Akses kuiz asas.</p></div>
+<div class="card"><span class="badge">Parent</span><h3>Untuk Ibu Bapa</h3><div class="price">RM9.90 <span class="small">/ bulan</span></div><p class="muted">1 anak, semua topik dan kemajuan penuh.</p><button class="btn pink paybtn" onclick="checkout('parent')">Langgan Parent 💳</button></div>
+<div class="card"><span class="badge">Teacher</span><h3>Untuk Guru</h3><div class="price">RM29 <span class="small">/ bulan</span></div><p class="muted">Kelas, tugasan dan laporan pelajar.</p><button class="btn primary paybtn" onclick="checkout('teacher')">Langgan Teacher 💳</button></div>
 </div>
+<p id="payMsg" class="small"></p>
 </section>
 
-<h2 class="section-title">Pelan CeriaLearn</h2>
-<section class="pricing">
-<div class="card"><h3>Free</h3><div class="price">RM0</div><p>Kuiz asas dan progress ringkas.</p></div>
-<div class="card"><h3>Parent</h3><div class="price">RM9.90<span class="muted" style="font-size:14px">/bulan</span></div><p>1 anak, progress penuh dan lebih banyak latihan.</p></div>
-<div class="card"><h3>Teacher</h3><div class="price">RM29<span class="muted" style="font-size:14px">/bulan</span></div><p>Kelas, tugasan dan laporan pelajar.</p></div>
+<section id="adminLogin" class="card section hidden">
+<h2>🔐 Admin Login</h2>
+<input id="adminId" placeholder="Admin ID" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;margin:6px 0">
+<input id="adminPw" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;margin:6px 0">
+<button class="btn primary" onclick="adminLogin()">Log Masuk Admin</button>
+<p id="adminMsg" class="small"></p>
+</section>
+
+<section id="adminPanel" class="card adminPanel section hidden">
+<h2>🛠️ Admin Full Access</h2>
+<div class="unlock">Semua topik dan pelan dibuka untuk sesi admin ini.</div>
+<div class="stats">
+<div class="stat"><b id="aAttempts">0</b><span>Kuiz dimainkan</span></div>
+<div class="stat"><b id="aCorrect">0</b><span>Jawapan betul</span></div>
+<div class="stat"><b id="aWrong">0</b><span>Jawapan salah</span></div>
+<div class="stat"><b id="aXP">0</b><span>Jumlah XP tempatan</span></div>
+</div>
+<button class="btn secondary" onclick="logoutAdmin()">Log Keluar Admin</button>
 </section>
 </main>
-<footer>© CeriaLearn</footer>
+<footer>CeriaLearn • Main. Belajar. Skor. • Kandungan disusun berpandukan KSSR (Semakan 2017) / penjajaran Tahap I KPM.</footer>
 
 <script>
-let selectedGrade=2, selectedTopic='Nombor & Operasi', current=0, score=0, answered=false;
-let supabaseClient=null;
-const questions=[
-{q:'RM5 + RM2 = ?',o:['RM6','RM7','RM8','RM9'],a:1},
-{q:'RM10 − RM3 = ?',o:['RM5','RM6','RM7','RM8'],a:2},
-{q:'3 × 2 = ?',o:['5','6','7','8'],a:1},
-{q:'12 ÷ 3 = ?',o:['3','4','5','6'],a:1},
-{q:'Pukul 3:00 menunjukkan jam berapa?',o:['Tiga tepat','Empat tepat','Dua setengah','Lima tepat'],a:0},
-{q:'Separuh daripada 8 ialah?',o:['2','3','4','5'],a:2},
-{q:'7 + 8 = ?',o:['13','14','15','16'],a:2},
-{q:'20 − 9 = ?',o:['9','10','11','12'],a:2},
-{q:'5 × 5 = ?',o:['20','25','30','35'],a:1},
-{q:'RM2 + RM5 + RM3 = ?',o:['RM8','RM9','RM10','RM11'],a:2}
-];
+const syllabus={"1": [["Nombor Bulat hingga 100", [["Apakah nombor selepas 39?", ["38", "40", "49", "30"], 1], ["Nombor manakah paling besar?", ["27", "72", "17", "57"], 1], ["Apakah nilai digit 5 dalam 58?", ["5", "50", "8", "58"], 1], ["Susunan menaik yang betul ialah…", ["9, 7, 5", "3, 6, 9", "8, 4, 2", "6, 5, 4"], 1], ["Apakah nombor sebelum 70?", ["69", "71", "60", "79"], 0]]], ["Tambah", [["6 + 3 = ?", ["7", "8", "9", "10"], 2], ["12 + 5 = ?", ["15", "16", "17", "18"], 2], ["20 + 10 = ?", ["21", "25", "30", "40"], 2], ["8 + 7 = ?", ["14", "15", "16", "17"], 1], ["35 + 4 = ?", ["37", "38", "39", "40"], 2]]], ["Tolak", [["9 − 4 = ?", ["4", "5", "6", "7"], 1], ["15 − 3 = ?", ["11", "12", "13", "14"], 1], ["20 − 10 = ?", ["5", "10", "15", "20"], 1], ["18 − 7 = ?", ["9", "10", "11", "12"], 2], ["40 − 6 = ?", ["33", "34", "35", "36"], 1]]], ["Pecahan", [["Separuh daripada 8 ialah…", ["2", "3", "4", "6"], 2], ["Satu benda dibahagi kepada 2 bahagian sama. Satu bahagian ialah…", ["separuh", "suku", "tiga suku", "satu"], 0], ["Suku bermaksud satu daripada berapa bahagian sama?", ["2", "3", "4", "5"], 2], ["Separuh daripada 10 ialah…", ["4", "5", "6", "7"], 1], ["Bentuk manakah mewakili 1/2?", ["1 daripada 2 bahagian sama", "1 daripada 3", "1 daripada 4", "2 daripada 3"], 0]]], ["Wang", [["RM5 + RM2 = ?", ["RM6", "RM7", "RM8", "RM9"], 1], ["50 sen + 20 sen = ?", ["60 sen", "70 sen", "80 sen", "90 sen"], 1], ["RM10 − RM3 = ?", ["RM6", "RM7", "RM8", "RM9"], 1], ["Dua keping RM1 berjumlah…", ["RM1", "RM2", "RM3", "RM4"], 1], ["RM2 + RM5 + RM3 = ?", ["RM8", "RM9", "RM10", "RM11"], 2]]], ["Masa dan Waktu", [["Pukul 3:00 ialah…", ["tiga tepat", "empat tepat", "dua setengah", "lima tepat"], 0], ["Selepas pukul 6 ialah pukul…", ["5", "6", "7", "8"], 2], ["Sehari mempunyai berapa jam?", ["12", "18", "24", "30"], 2], ["Hari selepas Isnin ialah…", ["Ahad", "Selasa", "Rabu", "Jumaat"], 1], ["Bulan selepas Januari ialah…", ["Mac", "Februari", "April", "Mei"], 1]]], ["Ukuran dan Sukatan", [["Alat biasa untuk mengukur panjang meja ialah…", ["jam", "pembaris", "syiling", "kalender"], 1], ["Yang manakah lebih berat?", ["pemadam", "gajah", "pensel", "kertas"], 1], ["Air biasanya disukat dalam…", ["jam", "liter", "meter", "ringgit"], 1], ["Unit sesuai untuk panjang pensel ialah…", ["cm", "kg", "L", "RM"], 0], ["Bekas penuh mempunyai air yang…", ["lebih banyak", "lebih sedikit", "tiada", "sama dengan kosong"], 0]]], ["Ruang dan Bentuk", [["Bentuk yang mempunyai 3 sisi ialah…", ["bulatan", "segi tiga", "segi empat", "bujur"], 1], ["Bentuk yang tiada sisi lurus ialah…", ["bulatan", "segi tiga", "segi empat sama", "segi empat tepat"], 0], ["Sebuah kubus ialah bentuk…", ["2D", "3D", "garis", "nombor"], 1], ["Bentuk segi empat sama mempunyai berapa sisi?", ["2", "3", "4", "5"], 2], ["Bola menyerupai bentuk…", ["kubus", "sfera", "kon", "silinder"], 1]]], ["Pengurusan Data", [["Jika Ali ada 3 epal dan Siti ada 5, siapa lebih banyak?", ["Ali", "Siti", "Sama", "Tidak tahu"], 1], ["Data boleh dipersembahkan menggunakan…", ["piktograf", "jam", "wang", "pembaris"], 0], ["Dalam piktograf, 1 gambar bintang = 1 murid. 4 bintang bermaksud…", ["2 murid", "3 murid", "4 murid", "5 murid"], 2], ["Kumpulan A ada 6, kumpulan B ada 2. Bezanya…", ["2", "3", "4", "5"], 2], ["Bilangan paling tinggi antara 2, 7, 5 ialah…", ["2", "5", "7", "8"], 2]]]], "2": [["Nombor Bulat hingga 1000", [["Apakah nombor selepas 599?", ["590", "600", "609", "699"], 1], ["Nilai digit 7 dalam 742 ialah…", ["7", "70", "700", "742"], 2], ["Nombor manakah paling kecil?", ["408", "480", "804", "840"], 0], ["350 + 100 = ?", ["400", "450", "500", "550"], 1], ["900 − 100 = ?", ["700", "800", "850", "900"], 1]]], ["Tambah dan Tolak", [["125 + 24 = ?", ["139", "149", "159", "169"], 1], ["300 + 175 = ?", ["425", "450", "475", "485"], 2], ["250 − 30 = ?", ["210", "220", "230", "240"], 1], ["500 − 125 = ?", ["365", "375", "385", "395"], 1], ["45 + 38 = ?", ["73", "83", "93", "103"], 1]]], ["Darab dan Bahagi", [["3 × 4 = ?", ["7", "10", "12", "14"], 2], ["5 × 6 = ?", ["25", "30", "35", "40"], 1], ["12 ÷ 3 = ?", ["3", "4", "5", "6"], 1], ["20 ÷ 5 = ?", ["2", "3", "4", "5"], 2], ["2 × 9 = ?", ["16", "18", "20", "22"], 1]]], ["Pecahan", [["1/2 daripada 12 ialah…", ["4", "5", "6", "8"], 2], ["1/4 daripada 8 ialah…", ["1", "2", "3", "4"], 1], ["Pecahan yang lebih besar ialah…", ["1/4", "1/2", "kedua-duanya sama", "0"], 1], ["Dua suku bersamaan…", ["1/2", "1/3", "1/4", "1"], 0], ["3 daripada 4 bahagian sama ditulis…", ["1/4", "2/4", "3/4", "4/3"], 2]]], ["Wang", [["RM20 − RM7 = ?", ["RM11", "RM12", "RM13", "RM14"], 2], ["RM5.00 + RM2.50 = ?", ["RM6.50", "RM7.00", "RM7.50", "RM8.00"], 2], ["100 sen bersamaan…", ["RM0.10", "RM1.00", "RM10.00", "RM100"], 1], ["RM10.00 − RM4.50 = ?", ["RM4.50", "RM5.00", "RM5.50", "RM6.50"], 2], ["3 keping RM5 berjumlah…", ["RM10", "RM15", "RM20", "RM25"], 1]]], ["Masa dan Waktu", [["30 minit ialah…", ["suku jam", "setengah jam", "1 jam", "2 jam"], 1], ["1 jam bersamaan…", ["30 minit", "45 minit", "60 minit", "100 minit"], 2], ["Pukul 7:30 disebut…", ["tujuh tepat", "setengah lapan", "setengah tujuh", "lapan tepat"], 1], ["2 jam selepas pukul 3 ialah…", ["4", "5", "6", "7"], 1], ["Seminggu mempunyai…", ["5 hari", "6 hari", "7 hari", "8 hari"], 2]]], ["Ukuran dan Sukatan", [["1 meter bersamaan…", ["10 cm", "50 cm", "100 cm", "1000 cm"], 2], ["Unit biasa untuk jisim beras ialah…", ["kg", "L", "cm", "minit"], 0], ["1 liter bersamaan…", ["100 mL", "500 mL", "1000 mL", "10 mL"], 2], ["50 cm + 20 cm = ?", ["60 cm", "70 cm", "80 cm", "90 cm"], 1], ["2 kg lebih berat daripada…", ["3 kg", "5 kg", "1 kg", "4 kg"], 2]]], ["Ruang", [["Segi empat tepat mempunyai…", ["2 sisi", "3 sisi", "4 sisi", "5 sisi"], 2], ["Bentuk 3D yang mempunyai dua tapak bulat ialah…", ["kubus", "silinder", "kon", "sfera"], 1], ["Kubus mempunyai berapa muka?", ["4", "5", "6", "8"], 2], ["Kon mempunyai satu…", ["tapak bulat", "tapak segi empat", "tiada tapak", "dua tapak bulat"], 0], ["Segi tiga mempunyai berapa bucu?", ["2", "3", "4", "5"], 1]]], ["Pengurusan Data", [["Data 2, 4, 4, 5. Nilai yang paling kerap ialah…", ["2", "4", "5", "6"], 1], ["Piktograf digunakan untuk…", ["mengukur panjang", "mewakili data", "mengira masa", "membayar"], 1], ["A=3 murid, B=7 murid. B lebih banyak sebanyak…", ["3", "4", "5", "7"], 1], ["Jumlah 5 dan 6 ialah…", ["10", "11", "12", "13"], 1], ["Antara 8, 2, 6, nilai tertinggi ialah…", ["2", "6", "8", "10"], 2]]]], "3": [["Nombor Bulat hingga 10 000", [["Apakah nombor selepas 4 999?", ["4 990", "5 000", "5 009", "5 999"], 1], ["Nilai digit 8 dalam 8 235 ialah…", ["8", "80", "800", "8000"], 3], ["Nombor paling besar ialah…", ["3 210", "3 201", "3 120", "3 102"], 0], ["6 000 + 500 = ?", ["6 050", "6 500", "6 550", "7 000"], 1], ["9 000 − 1 000 = ?", ["7 000", "8 000", "8 500", "9 000"], 1]]], ["Tambah", [["1 245 + 320 = ?", ["1 465", "1 565", "1 575", "1 665"], 1], ["2 500 + 1 250 = ?", ["3 650", "3 750", "3 850", "4 750"], 1], ["785 + 96 = ?", ["871", "881", "891", "901"], 1], ["3 000 + 999 = ?", ["3 899", "3 909", "3 999", "4 999"], 2], ["450 + 450 = ?", ["800", "850", "900", "950"], 2]]], ["Tolak", [["1 000 − 275 = ?", ["715", "725", "735", "745"], 1], ["5 000 − 2 000 = ?", ["2 000", "3 000", "4 000", "7 000"], 1], ["900 − 456 = ?", ["434", "444", "454", "464"], 1], ["2 500 − 500 = ?", ["1 500", "2 000", "2 250", "3 000"], 1], ["750 − 125 = ?", ["615", "625", "635", "645"], 1]]], ["Darab", [["7 × 8 = ?", ["48", "54", "56", "64"], 2], ["9 × 6 = ?", ["45", "48", "54", "56"], 2], ["12 × 3 = ?", ["24", "30", "36", "42"], 2], ["25 × 4 = ?", ["50", "75", "100", "125"], 2], ["11 × 5 = ?", ["45", "50", "55", "60"], 2]]], ["Bahagi", [["48 ÷ 6 = ?", ["6", "7", "8", "9"], 2], ["72 ÷ 8 = ?", ["7", "8", "9", "10"], 2], ["100 ÷ 4 = ?", ["20", "25", "30", "40"], 1], ["63 ÷ 7 = ?", ["7", "8", "9", "10"], 2], ["45 ÷ 5 = ?", ["8", "9", "10", "11"], 1]]], ["Pecahan dan Perpuluhan Asas", [["1/2 bersamaan perpuluhan…", ["0.2", "0.5", "1.2", "5.0"], 1], ["0.7 bermaksud…", ["7 persepuluh", "7 perseratus", "1 persepuluh", "70"], 0], ["Pecahan yang lebih besar ialah…", ["1/4", "3/4", "kedua sama", "0"], 1], ["2/4 boleh diringkaskan kepada…", ["1/2", "1/3", "1/4", "2"], 0], ["0.3 + 0.2 = ?", ["0.4", "0.5", "0.6", "0.7"], 1]]], ["Wang", [["RM50 − RM18 = ?", ["RM30", "RM31", "RM32", "RM33"], 2], ["RM12.50 + RM7.50 = ?", ["RM19", "RM20", "RM20.50", "RM21"], 1], ["4 × RM5 = ?", ["RM15", "RM20", "RM25", "RM30"], 1], ["RM30 ÷ 3 = ?", ["RM5", "RM10", "RM15", "RM20"], 1], ["RM100 − RM64.50 = ?", ["RM34.50", "RM35.00", "RM35.50", "RM36.50"], 2]]], ["Masa dan Waktu", [["90 minit bersamaan…", ["1 jam", "1 jam 30 minit", "2 jam", "2 jam 30 minit"], 1], ["2 jam 15 minit + 45 minit = ?", ["2 jam 30 minit", "2 jam 45 minit", "3 jam", "3 jam 15 minit"], 2], ["Pukul 14:00 dalam sistem 12 jam ialah…", ["12 tengah hari", "1 petang", "2 petang", "4 petang"], 2], ["15 minit ialah…", ["suku jam", "setengah jam", "tiga suku jam", "1 jam"], 0], ["3 hari mempunyai berapa jam?", ["48", "60", "72", "96"], 2]]], ["Ukuran, Sukatan dan Ruang", [["2 m 30 cm bersamaan…", ["203 cm", "220 cm", "230 cm", "300 cm"], 2], ["3 kg = ?", ["300 g", "3000 g", "30 g", "30 000 g"], 1], ["2 L = ?", ["200 mL", "2000 mL", "20 mL", "20 000 mL"], 1], ["Perimeter segi empat sama sisi 5 cm ialah…", ["10 cm", "15 cm", "20 cm", "25 cm"], 2], ["Bentuk yang mempunyai 6 muka segi empat sama ialah…", ["kubus", "kon", "sfera", "silinder"], 0]]], ["Pengurusan Data", [["Data 3, 5, 5, 7. Mod ialah…", ["3", "5", "6", "7"], 1], ["Jumlah data 4 + 6 + 5 = ?", ["14", "15", "16", "17"], 1], ["Carta palang sesuai untuk…", ["mewakili perbandingan data", "mengukur masa", "mengukur panjang", "membayar"], 0], ["Jika A=8 dan B=12, beza ialah…", ["2", "4", "6", "20"], 1], ["Nilai tertinggi antara 15, 9, 12 ialah…", ["9", "12", "15", "21"], 2]]]]};
+let grade=1, topicName='', pool=[], current=0, score=0, answered=false, isAdmin=sessionStorage.getItem('cl_admin')==='1';
 
-function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
-function selectGrade(g,el){selectedGrade=g;document.querySelectorAll('.grade').forEach(x=>x.classList.remove('active'));el.classList.add('active')}
-function selectTopic(el){selectedTopic=el.dataset.topic;document.querySelectorAll('.topic').forEach(x=>x.classList.remove('active'));el.classList.add('active')}
-function startQuiz(){current=0;score=0;answered=false;document.getElementById('resultSection').classList.add('hidden');document.getElementById('quizSection').classList.remove('hidden');renderQuestion();scrollToId('quizSection')}
-function renderQuestion(){
- const q=questions[current];answered=false;
- document.getElementById('feedback').textContent='';
- document.getElementById('nextBtn').classList.add('hidden');
- document.getElementById('quizLabel').textContent=`Tahun ${selectedGrade} • ${selectedTopic}`;
- document.getElementById('qCount').textContent=`${current+1}/10`;
- document.getElementById('bar').style.width=`${(current/10)*100}%`;
- document.getElementById('questionText').textContent=q.q;
- const box=document.getElementById('options');box.innerHTML='';
- q.o.forEach((txt,i)=>{const b=document.createElement('button');b.className='option';b.textContent=txt;b.onclick=()=>choose(i,b);box.appendChild(b)})
-}
-function choose(i,btn){
- if(answered)return;answered=true;
- const q=questions[current];
- const fb=document.getElementById('feedback');
- document.querySelectorAll('.option').forEach((b,idx)=>{b.disabled=true;if(idx===q.a)b.style.borderColor='#55b98a'})
- if(i===q.a){score++;fb.textContent='Betul! +10 XP';fb.className='feedback ok'} else {fb.textContent=`Belum tepat. Jawapan: ${q.o[q.a]}`;fb.className='feedback bad'}
- document.getElementById('nextBtn').classList.remove('hidden');
-}
-function nextQuestion(){current++;if(current<questions.length)renderQuestion();else finishQuiz()}
-function finishQuiz(){
- document.getElementById('quizSection').classList.add('hidden');
- document.getElementById('resultSection').classList.remove('hidden');
- const gained=score*10;
- const xp=(+localStorage.getItem('cl_xp')||0)+gained;
- const streak=(+localStorage.getItem('cl_streak')||0)+1;
- localStorage.setItem('cl_xp',xp);localStorage.setItem('cl_streak',streak);
- document.getElementById('resultText').textContent=`Skor ${score}/10 • +${gained} XP`;
- updateStats();scrollToId('resultSection')
-}
-function restartQuiz(){startQuiz()}
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
 function updateStats(){
- const xp=+localStorage.getItem('cl_xp')||0;const streak=+localStorage.getItem('cl_streak')||0;
- document.getElementById('xpStat').textContent=xp;document.getElementById('streakStat').textContent=streak;document.getElementById('levelStat').textContent=Math.floor(xp/100)+1
+ const xp=+(localStorage.cl_xp||0), streak=+(localStorage.cl_streak||0), stars=+(localStorage.cl_stars||0);
+ document.getElementById('xp').textContent=xp;document.getElementById('streak').textContent=streak;document.getElementById('stars').textContent=stars;document.getElementById('level').textContent=Math.floor(xp/100)+1;
 }
-async function initSupabase(){
- try{
-  const r=await fetch('/api/config');const c=await r.json();
-  if(c.supabaseUrl&&c.supabaseKey){supabaseClient=window.supabase.createClient(c.supabaseUrl,c.supabaseKey)}
- }catch(e){}
+function selectGrade(g,el){
+ grade=g;document.querySelectorAll('.grade').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');renderTopics();
 }
-async function loginSupabase(){
- const msg=document.getElementById('loginMsg');
- if(!supabaseClient){msg.textContent='Supabase belum disambungkan. Gunakan Demo Mode dahulu.';return}
- const email=document.getElementById('email').value.trim();
- const password=document.getElementById('password').value;
- const {error}=await supabaseClient.auth.signInWithPassword({email,password});
- msg.textContent=error?error.message:'Log masuk berjaya.'
+function renderTopics(){
+ const box=document.getElementById('topicGrid');box.innerHTML='';
+ (syllabus[String(grade)]||[]).forEach(([name,qs],i)=>{
+   const d=document.createElement('div');d.className='card topic';d.innerHTML=`<span class="badge">Topik ${i+1}</span><h3>${name}</h3><p class="muted">${qs.length} soalan contoh</p>`;
+   d.onclick=()=>startTopic(name,qs,d);box.appendChild(d);
+ });
 }
-function demoLogin(){document.getElementById('loginMsg').textContent='Demo Mode aktif. Selamat belajar!';scrollToId('learn')}
-updateStats();initSupabase();
+function startTopic(name,qs,el){
+ document.querySelectorAll('.topic').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');topicName=name;pool=[...qs].sort(()=>Math.random()-.5);current=0;score=0;answered=false;
+ document.getElementById('quiz').classList.remove('hidden');document.getElementById('result').classList.add('hidden');renderQuestion();go('quiz');
+}
+function renderQuestion(){
+ const [q,opts,a]=pool[current];answered=false;document.getElementById('quizTitle').textContent=`Tahun ${grade} • ${topicName}`;
+ document.getElementById('count').textContent=`${current+1} / ${pool.length}`;document.getElementById('bar').style.width=`${(current/pool.length)*100}%`;
+ document.getElementById('question').textContent=q;document.getElementById('feedback').innerHTML='';document.getElementById('next').classList.add('hidden');
+ const box=document.getElementById('options');box.innerHTML='';
+ opts.forEach((t,i)=>{const b=document.createElement('button');b.className='option';b.textContent=t;b.onclick=()=>answer(i,b);box.appendChild(b)})
+}
+function gentleTone(ok){
+ try{const C=window.AudioContext||window.webkitAudioContext;const c=new C();const o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?660:260;g.gain.setValueAtTime(.05,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.28);o.start();o.stop(c.currentTime+.3)}catch(e){}
+}
+function confetti(){
+ const c=document.getElementById('confetti');c.innerHTML='';for(let i=0;i<18;i++){const s=document.createElement('i');s.textContent=['⭐','✨','🌈','💛'][i%4];s.style.left=Math.random()*100+'%';s.style.animationDelay=(Math.random()*.4)+'s';s.style.fontSize=(16+Math.random()*18)+'px';c.appendChild(s)}setTimeout(()=>c.innerHTML='',1800)
+}
+function answer(i,btn){
+ if(answered)return;answered=true;const [q,opts,a]=pool[current];const fb=document.getElementById('feedback');document.querySelectorAll('.option').forEach(x=>x.disabled=true);
+ let correct=+(localStorage.cl_correct||0), wrong=+(localStorage.cl_wrong||0);
+ if(i===a){score++;correct++;localStorage.cl_correct=correct;fb.innerHTML='<div class="correctAnim">🌟😊🌟</div>Bagus! Jawapan tepat. +10 XP';gentleTone(true);confetti();btn.style.borderColor='#57c9a4';}
+ else{wrong++;localStorage.cl_wrong=wrong;fb.innerHTML=`<div class="wrongAnim">🐻💭</div>Hampir! Cuba ingat semula. Jawapan betul: <b>${opts[a]}</b>`;gentleTone(false);btn.style.borderColor='#ff9ab9';document.querySelectorAll('.option')[a].style.borderColor='#57c9a4';}
+ document.getElementById('next').classList.remove('hidden');
+}
+function nextQuestion(){current++;if(current<pool.length)renderQuestion();else finish()}
+function finish(){
+ document.getElementById('quiz').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+ const gain=score*10;localStorage.cl_xp=(+(localStorage.cl_xp||0))+gain;localStorage.cl_streak=(+(localStorage.cl_streak||0))+1;localStorage.cl_stars=(+(localStorage.cl_stars||0))+score;localStorage.cl_attempts=(+(localStorage.cl_attempts||0))+1;
+ document.getElementById('resultText').textContent=`Skor ${score}/${pool.length} • +${gain} XP • +${score} bintang`;updateStats();confetti();go('result');updateAdminStats();
+}
+function restart(){const match=(syllabus[String(grade)]||[]).find(x=>x[0]===topicName);if(match)startTopic(match[0],match[1],document.querySelector('.topic.selected')||document.querySelector('.topic'))}
+async function checkout(plan){
+ const msg=document.getElementById('payMsg');msg.textContent='Membuka Stripe Checkout…';
+ try{const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan})});const d=await r.json();if(d.url)location.href=d.url;else msg.textContent=d.error||'Pembayaran belum dikonfigurasi.'}catch(e){msg.textContent='Pembayaran belum dapat dibuka.'}
+}
+function showAdminLogin(){document.getElementById('adminLogin').classList.remove('hidden');go('adminLogin')}
+async function adminLogin(){
+ const r=await fetch('/api/admin-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:document.getElementById('adminId').value,password:document.getElementById('adminPw').value})});
+ const d=await r.json();if(d.ok){sessionStorage.setItem('cl_admin','1');isAdmin=true;document.getElementById('adminLogin').classList.add('hidden');document.getElementById('adminPanel').classList.remove('hidden');updateAdminStats();go('adminPanel')}else document.getElementById('adminMsg').textContent='ID atau password tidak betul.';
+}
+function logoutAdmin(){sessionStorage.removeItem('cl_admin');isAdmin=false;document.getElementById('adminPanel').classList.add('hidden')}
+function updateAdminStats(){
+ if(!isAdmin)return;document.getElementById('aAttempts').textContent=+(localStorage.cl_attempts||0);document.getElementById('aCorrect').textContent=+(localStorage.cl_correct||0);document.getElementById('aWrong').textContent=+(localStorage.cl_wrong||0);document.getElementById('aXP').textContent=+(localStorage.cl_xp||0);
+}
+updateStats();renderTopics();document.querySelector('.grade').classList.add('selected');if(isAdmin){document.getElementById('adminPanel').classList.remove('hidden');updateAdminStats()}
 </script>
-</body>
-</html>
+</body></html>
