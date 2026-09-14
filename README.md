@@ -1,7 +1,27 @@
-# CeriaLearn Clean Restart
+# CeriaLearn MVP v2
 
-Clean Vercel-ready starter.
+Upload all files and folders in this ZIP to the root of your GitHub repository.
 
-Upload these files to a NEW GitHub repository and import that new repository into a NEW Vercel project.
+Vercel:
+- Import this repository
+- Framework preset: Other
+- Output Directory: leave empty
+- Root Directory: repository root
 
-Keep index.html at the repository root. Do not set an Output Directory in Vercel.
+Optional environment variables:
+- SUPABASE_URL
+- SUPABASE_PUBLISHABLE_KEY
+- STRIPE_SECRET_KEY
+- STRIPE_PARENT_PRICE_ID
+- STRIPE_TEACHER_PRICE_ID
+- APP_URL
+
+This version includes:
+- Tahun 1–3 selection
+- 5 Matematik topic cards
+- 10-question quiz
+- XP, streak and level using localStorage
+- Demo Mode
+- Supabase-ready login
+- Parent/Teacher pricing
+- Mobile-friendly layout

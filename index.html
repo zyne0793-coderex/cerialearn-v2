@@ -4,44 +4,188 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CeriaLearn — Main. Belajar. Skor.</title>
+<meta name="description" content="Ulang kaji sekolah rendah jadi permainan.">
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f7f8fc;color:#1f2937}
-header{padding:18px 24px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between}
-main{max-width:900px;margin:auto;padding:48px 24px}
-.hero{text-align:center;padding:40px 0}
-h1{font-size:52px;margin:0 0 14px}
-p{line-height:1.5}
-.btn{padding:14px 22px;border:0;border-radius:12px;background:#111827;color:#fff;font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:30px}
-.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:22px}
-.option{display:block;width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #d1d5db;background:#fff;text-align:left}
-footer{text-align:center;padding:30px;color:#6b7280}
+:root{--bg:#f6f8ff;--card:#fff;--text:#182033;--muted:#687085;--line:#e7eaf1;--accent:#5b6cff;--ok:#137a4a;--bad:#b33a3a}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:22px;font-weight:800}.tag{color:var(--muted);font-size:14px}
+main{max-width:1050px;margin:auto;padding:28px 18px 48px}
+.hero{background:linear-gradient(135deg,#fff,#eef1ff);border:1px solid var(--line);border-radius:24px;padding:34px;margin-bottom:22px}
+.hero h1{font-size:clamp(34px,6vw,58px);margin:0 0 10px;line-height:1}.hero p{color:var(--muted);font-size:18px}
+.row{display:flex;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--accent);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.stat b{font-size:26px;display:block}.stat span{color:var(--muted);font-size:13px}
+.section-title{margin:26px 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.card h3{margin:0 0 8px}.card p{color:var(--muted);margin:0 0 14px}
+.grade,.topic{cursor:pointer;transition:.18s}.grade:hover,.topic:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,34,60,.08)}
+.active{outline:3px solid #cfd4ff}
+.hidden{display:none!important}
+.quiz{max-width:760px;margin:24px auto}.qmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
+.question{font-size:28px;font-weight:800;margin:18px 0}.option{width:100%;text-align:left;padding:14px 16px;margin:9px 0;border:1px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-size:16px}
+.option:hover{border-color:#b9c0ff}.feedback{margin-top:14px;font-weight:700}.ok{color:var(--ok)}.bad{color:var(--bad)}
+.progress{height:10px;background:#e9ecf7;border-radius:999px;overflow:hidden;margin:14px 0}.bar{height:100%;background:var(--accent);width:0%}
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.price{font-size:30px;font-weight:800}.muted{color:var(--muted)}
+.loginbox{display:grid;grid-template-columns:1fr 1fr;gap:10px}.loginbox input{padding:12px;border:1px solid var(--line);border-radius:10px}
+footer{text-align:center;color:var(--muted);padding:24px}
+@media(max-width:640px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.loginbox{grid-template-columns:1fr}.hero{padding:24px}.question{font-size:23px}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<header><strong>CeriaLearn</strong><span>Main. Belajar. Skor.</span></header>
+<header>
+<div class="brand">CeriaLearn</div>
+<div class="tag">Main. Belajar. Skor.</div>
+</header>
 <main>
 <section class="hero">
 <h1>Ulang kaji jadi permainan.</h1>
-<p>Latihan Matematik sekolah rendah yang ringkas dan menyeronokkan.</p>
-<button class="btn" onclick="document.getElementById('quiz').style.display='block'">Cuba Kuiz</button>
+<p>Pilih tahun, pilih topik, jawab soalan dan kumpul XP.</p>
+<div class="row">
+<button class="btn primary" onclick="scrollToId('learn')">Mula Belajar</button>
+<button class="btn secondary" onclick="scrollToId('login')">Log Masuk</button>
+</div>
 </section>
-<section class="grid">
-<div class="card"><h3>Quick Quiz</h3><p>Soalan pantas 5–10 minit.</p></div>
-<div class="card"><h3>Target</h3><p>Kumpul XP dan capai sasaran.</p></div>
-<div class="card"><h3>Adventure</h3><p>Belajar ikut tahap permainan.</p></div>
+
+<section class="stats">
+<div class="stat"><b id="xpStat">0</b><span>XP</span></div>
+<div class="stat"><b id="streakStat">0</b><span>Streak</span></div>
+<div class="stat"><b id="levelStat">1</b><span>Level</span></div>
 </section>
-<section id="quiz" class="card" style="display:none;margin-top:30px">
-<h3>RM5 + RM2 = ?</h3>
-<button class="option" onclick="show(false)">RM6</button>
-<button class="option" onclick="show(true)">RM7</button>
-<button class="option" onclick="show(false)">RM8</button>
-<p id="result"></p>
+
+<section id="login" class="card">
+<h2>Log Masuk Pelajar</h2>
+<p class="muted">Boleh guna Demo Mode sekarang. Supabase akan digunakan apabila env Vercel disambungkan.</p>
+<div class="loginbox">
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Kata laluan">
+</div>
+<div class="row" style="margin-top:10px">
+<button class="btn primary" onclick="loginSupabase()">Log Masuk</button>
+<button class="btn secondary" onclick="demoLogin()">Demo Mode</button>
+</div>
+<p id="loginMsg" class="muted"></p>
+</section>
+
+<section id="learn">
+<h2 class="section-title">1. Pilih Tahun</h2>
+<div class="grid">
+<div class="card grade" onclick="selectGrade(1,this)"><h3>Tahun 1</h3><p>Nombor, wang dan masa asas.</p></div>
+<div class="card grade" onclick="selectGrade(2,this)"><h3>Tahun 2</h3><p>Operasi, wang, masa dan darab.</p></div>
+<div class="card grade" onclick="selectGrade(3,this)"><h3>Tahun 3</h3><p>Operasi, pecahan dan masalah harian.</p></div>
+</div>
+
+<h2 class="section-title">2. Pilih Topik</h2>
+<div class="grid" id="topics">
+<div class="card topic" data-topic="Nombor & Operasi" onclick="selectTopic(this)"><h3>Nombor & Operasi</h3><p>Tambah dan tolak.</p></div>
+<div class="card topic" data-topic="Wang" onclick="selectTopic(this)"><h3>Wang</h3><p>RM dan sen.</p></div>
+<div class="card topic" data-topic="Masa" onclick="selectTopic(this)"><h3>Masa</h3><p>Jam dan waktu.</p></div>
+<div class="card topic" data-topic="Darab & Bahagi" onclick="selectTopic(this)"><h3>Darab & Bahagi</h3><p>Latihan operasi asas.</p></div>
+<div class="card topic" data-topic="Pecahan" onclick="selectTopic(this)"><h3>Pecahan</h3><p>Separuh, suku dan pecahan mudah.</p></div>
+</div>
+<div class="row" style="margin-top:16px"><button class="btn primary" onclick="startQuiz()">Mula Kuiz 10 Soalan</button></div>
+</section>
+
+<section id="quizSection" class="quiz card hidden">
+<div class="qmeta"><span id="quizLabel"></span><span id="qCount"></span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="question" id="questionText"></div>
+<div id="options"></div>
+<div id="feedback" class="feedback"></div>
+<button id="nextBtn" class="btn primary hidden" onclick="nextQuestion()" style="margin-top:14px">Seterusnya</button>
+</section>
+
+<section id="resultSection" class="card hidden">
+<h2>Keputusan Kuiz</h2>
+<p id="resultText"></p>
+<div class="row">
+<button class="btn primary" onclick="restartQuiz()">Main Lagi</button>
+<button class="btn secondary" onclick="scrollToId('learn')">Pilih Topik Lain</button>
+</div>
+</section>
+
+<h2 class="section-title">Pelan CeriaLearn</h2>
+<section class="pricing">
+<div class="card"><h3>Free</h3><div class="price">RM0</div><p>Kuiz asas dan progress ringkas.</p></div>
+<div class="card"><h3>Parent</h3><div class="price">RM9.90<span class="muted" style="font-size:14px">/bulan</span></div><p>1 anak, progress penuh dan lebih banyak latihan.</p></div>
+<div class="card"><h3>Teacher</h3><div class="price">RM29<span class="muted" style="font-size:14px">/bulan</span></div><p>Kelas, tugasan dan laporan pelajar.</p></div>
 </section>
 </main>
 <footer>© CeriaLearn</footer>
+
 <script>
-function show(ok){document.getElementById('result').textContent=ok?'Betul! +10 XP 🎉':'Cuba lagi.'}
+let selectedGrade=2, selectedTopic='Nombor & Operasi', current=0, score=0, answered=false;
+let supabaseClient=null;
+const questions=[
+{q:'RM5 + RM2 = ?',o:['RM6','RM7','RM8','RM9'],a:1},
+{q:'RM10 − RM3 = ?',o:['RM5','RM6','RM7','RM8'],a:2},
+{q:'3 × 2 = ?',o:['5','6','7','8'],a:1},
+{q:'12 ÷ 3 = ?',o:['3','4','5','6'],a:1},
+{q:'Pukul 3:00 menunjukkan jam berapa?',o:['Tiga tepat','Empat tepat','Dua setengah','Lima tepat'],a:0},
+{q:'Separuh daripada 8 ialah?',o:['2','3','4','5'],a:2},
+{q:'7 + 8 = ?',o:['13','14','15','16'],a:2},
+{q:'20 − 9 = ?',o:['9','10','11','12'],a:2},
+{q:'5 × 5 = ?',o:['20','25','30','35'],a:1},
+{q:'RM2 + RM5 + RM3 = ?',o:['RM8','RM9','RM10','RM11'],a:2}
+];
+
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function selectGrade(g,el){selectedGrade=g;document.querySelectorAll('.grade').forEach(x=>x.classList.remove('active'));el.classList.add('active')}
+function selectTopic(el){selectedTopic=el.dataset.topic;document.querySelectorAll('.topic').forEach(x=>x.classList.remove('active'));el.classList.add('active')}
+function startQuiz(){current=0;score=0;answered=false;document.getElementById('resultSection').classList.add('hidden');document.getElementById('quizSection').classList.remove('hidden');renderQuestion();scrollToId('quizSection')}
+function renderQuestion(){
+ const q=questions[current];answered=false;
+ document.getElementById('feedback').textContent='';
+ document.getElementById('nextBtn').classList.add('hidden');
+ document.getElementById('quizLabel').textContent=`Tahun ${selectedGrade} • ${selectedTopic}`;
+ document.getElementById('qCount').textContent=`${current+1}/10`;
+ document.getElementById('bar').style.width=`${(current/10)*100}%`;
+ document.getElementById('questionText').textContent=q.q;
+ const box=document.getElementById('options');box.innerHTML='';
+ q.o.forEach((txt,i)=>{const b=document.createElement('button');b.className='option';b.textContent=txt;b.onclick=()=>choose(i,b);box.appendChild(b)})
+}
+function choose(i,btn){
+ if(answered)return;answered=true;
+ const q=questions[current];
+ const fb=document.getElementById('feedback');
+ document.querySelectorAll('.option').forEach((b,idx)=>{b.disabled=true;if(idx===q.a)b.style.borderColor='#55b98a'})
+ if(i===q.a){score++;fb.textContent='Betul! +10 XP';fb.className='feedback ok'} else {fb.textContent=`Belum tepat. Jawapan: ${q.o[q.a]}`;fb.className='feedback bad'}
+ document.getElementById('nextBtn').classList.remove('hidden');
+}
+function nextQuestion(){current++;if(current<questions.length)renderQuestion();else finishQuiz()}
+function finishQuiz(){
+ document.getElementById('quizSection').classList.add('hidden');
+ document.getElementById('resultSection').classList.remove('hidden');
+ const gained=score*10;
+ const xp=(+localStorage.getItem('cl_xp')||0)+gained;
+ const streak=(+localStorage.getItem('cl_streak')||0)+1;
+ localStorage.setItem('cl_xp',xp);localStorage.setItem('cl_streak',streak);
+ document.getElementById('resultText').textContent=`Skor ${score}/10 • +${gained} XP`;
+ updateStats();scrollToId('resultSection')
+}
+function restartQuiz(){startQuiz()}
+function updateStats(){
+ const xp=+localStorage.getItem('cl_xp')||0;const streak=+localStorage.getItem('cl_streak')||0;
+ document.getElementById('xpStat').textContent=xp;document.getElementById('streakStat').textContent=streak;document.getElementById('levelStat').textContent=Math.floor(xp/100)+1
+}
+async function initSupabase(){
+ try{
+  const r=await fetch('/api/config');const c=await r.json();
+  if(c.supabaseUrl&&c.supabaseKey){supabaseClient=window.supabase.createClient(c.supabaseUrl,c.supabaseKey)}
+ }catch(e){}
+}
+async function loginSupabase(){
+ const msg=document.getElementById('loginMsg');
+ if(!supabaseClient){msg.textContent='Supabase belum disambungkan. Gunakan Demo Mode dahulu.';return}
+ const email=document.getElementById('email').value.trim();
+ const password=document.getElementById('password').value;
+ const {error}=await supabaseClient.auth.signInWithPassword({email,password});
+ msg.textContent=error?error.message:'Log masuk berjaya.'
+}
+function demoLogin(){document.getElementById('loginMsg').textContent='Demo Mode aktif. Selamat belajar!';scrollToId('learn')}
+updateStats();initSupabase();
 </script>
 </body>
 </html>
