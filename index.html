@@ -33,15 +33,56 @@ main{max-width:1100px;margin:auto;padding:24px 16px 60px;position:relative;z-ind
 footer{text-align:center;color:var(--muted);padding:30px}
 @keyframes pop{0%{transform:scale(.5)}70%{transform:scale(1.25)}100%{transform:scale(1)}} @keyframes wobble{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}} @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.2}} @keyframes float{50%{transform:translateY(-12px) rotate(8deg)}}
 @media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)} .hero:after{font-size:42px;opacity:.75}}
+
+/* Polished v4 */
+html{scroll-behavior:smooth}
+.skip-link{position:fixed;left:12px;top:-60px;z-index:999;background:#111827;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:900}
+.skip-link:focus{top:12px}
+.scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--pink),var(--purple),var(--mint));z-index:9999}
+.desktop-nav{display:flex;gap:8px}.desktop-nav a,.mobile-menu a{color:var(--ink);text-decoration:none;font-weight:900;padding:9px 11px;border-radius:12px}.desktop-nav a:hover,.mobile-menu a:hover{background:#f1ecff;color:var(--purple)}
+.header-actions{display:flex;gap:7px;align-items:center}.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;min-width:42px;height:42px;cursor:pointer;font-size:18px;transition:.18s}.icon-btn:hover{transform:translateY(-2px) scale(1.04);border-color:#cfc4ff;background:#f8f5ff}
+.mobile-menu-btn{display:none}.mobile-menu{position:fixed;z-index:19;top:68px;left:12px;right:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:0 18px 50px #0002}.mobile-menu a{display:block}
+.search-panel{position:fixed;inset:0;z-index:200;background:#11182799;backdrop-filter:blur(7px);padding:9vh 16px}.search-box{max-width:700px;margin:auto;background:var(--card);border-radius:22px;padding:16px;box-shadow:0 20px 70px #0004}.search-box input,.newsletter input,.password-wrap input{width:100%;padding:13px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;font:inherit}.search-results{max-height:55vh;overflow:auto;margin-top:10px}.search-result{display:block;padding:12px;border-radius:12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}.search-result:hover{background:#f1ecff}
+.loading-overlay{position:fixed;inset:0;z-index:500;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transition:.3s}.loading-overlay.done{opacity:0;pointer-events:none}.loader-star{font-size:58px;animation:spinpop 1s infinite ease-in-out}
+@keyframes spinpop{50%{transform:rotate(180deg) scale(1.3)}100%{transform:rotate(360deg)}}
+.floating{position:fixed;z-index:80;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;text-decoration:none;border:0;box-shadow:0 10px 30px #0003;cursor:pointer;font-size:24px;transition:.2s}.floating:hover{transform:translateY(-4px) scale(1.06)}.contact-btn{right:18px;bottom:20px;background:var(--purple);color:#fff}.top-btn{right:18px;bottom:84px;background:var(--card);color:var(--ink)}
+.faq-list details{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:10px 0;padding:4px 16px}.faq-list summary{cursor:pointer;font-weight:900;padding:14px 0}.faq-list details[open]{box-shadow:0 8px 25px #0000000d}.faq-list p{color:var(--muted)}
+.newsletter{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}.newsletter-form{display:flex;gap:8px;min-width:min(100%,380px)}.success-state{background:#eafaf4;color:#12694e;border-radius:14px;padding:14px;font-weight:900}
+.password-wrap{display:flex;gap:6px;align-items:center;margin:6px 0}.password-toggle{border:1px solid var(--line);background:var(--card);border-radius:12px;height:48px;min-width:48px;cursor:pointer}.password-toggle:hover{background:#f1ecff}
+.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:150;max-width:850px;margin:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 18px 60px #0004;display:flex;align-items:center;justify-content:space-between;gap:14px}.cookie-banner p{margin:3px 0;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;z-index:300;background:#11182799;display:grid;place-items:center;padding:16px}.modal-card{max-width:420px;width:100%;background:var(--card);border-radius:22px;padding:24px;text-align:center;box-shadow:0 24px 80px #0004}.modal-icon{font-size:44px}.danger{background:#c83f52;color:#fff}.danger:hover{background:#a92d40}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body.dark{--bg:#111522;--card:#191f2e;--ink:#f4f6fb;--muted:#aeb7c8;--line:#2b3448}body.dark .hero{background:linear-gradient(135deg,#191f2e,#242044 55%,#3a3220)}body.dark .secondary,body.dark .option,body.dark .stat{background:var(--card);color:var(--ink)}body.dark .search-result:hover,body.dark .desktop-nav a:hover,body.dark .mobile-menu a:hover{background:#292344}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}
+@media(max-width:760px){.desktop-nav,.admin-btn{display:none}.mobile-menu-btn{display:block}.newsletter{grid-template-columns:1fr}.newsletter-form{min-width:0;flex-direction:column}.cookie-banner{align-items:flex-start;flex-direction:column}.header-actions{gap:4px}}
+@media print{header,.btn,.floating,.cookie-banner,.search-panel,.mobile-menu,.scroll-progress,.loading-overlay,#adminLogin,#adminPanel{display:none!important}body{background:#fff!important;color:#000!important}main{max-width:none;padding:0}.card,.hero{box-shadow:none!important;border:1px solid #bbb!important;break-inside:avoid}a{color:#000;text-decoration:none}}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#mainContent">Langkau ke kandungan utama</a>
+<div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 <div id="confetti" class="confetti"></div>
-<header>
+<header id="siteHeader">
 <div class="brand">Ceria<span>Learn</span></div>
-<div class="row"><button class="btn secondary" onclick="showAdminLogin()">Admin</button></div>
+<nav class="desktop-nav" aria-label="Navigasi utama">
+<a href="#learn">Belajar</a><a href="#pricing">Pelan</a><a href="#faq">FAQ</a>
+</nav>
+<div class="header-actions">
+<button class="icon-btn" id="searchBtn" aria-label="Cari" title="Cari">🔎</button>
+<button class="icon-btn" id="themeBtn" aria-label="Tukar tema" title="Tukar tema">🌙</button>
+<button class="btn secondary admin-btn" onclick="showAdminLogin()">Admin</button>
+<button class="icon-btn mobile-menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false">☰</button>
+</div>
 </header>
-<main>
+<div id="mobileMenu" class="mobile-menu hidden">
+<a href="#learn">🎮 Belajar</a><a href="#pricing">💳 Pelan</a><a href="#faq">❓ FAQ</a><button class="btn secondary" onclick="showAdminLogin()">🔐 Admin</button>
+</div>
+<div id="searchPanel" class="search-panel hidden" role="dialog" aria-modal="true" aria-label="Carian laman">
+<div class="search-box"><div class="row"><input id="siteSearch" type="search" placeholder="Cari topik, pelan, FAQ…" aria-label="Cari laman"><button class="icon-btn" id="closeSearch" aria-label="Tutup carian">✕</button></div><div id="searchResults" class="search-results"></div></div>
+</div>
+<main id="mainContent" tabindex="-1">
+<div id="loadingOverlay" class="loading-overlay" aria-live="polite"><div class="loader-star">⭐</div><b>Memuat CeriaLearn…</b></div>
 <section class="hero">
 <span class="badge">Matematik KPM • Tahun 1–3</span>
 <h1>Belajar. Main. Menang! 🌈</h1>
@@ -95,7 +136,7 @@ footer{text-align:center;color:var(--muted);padding:30px}
 <section id="adminLogin" class="card section hidden">
 <h2>🔐 Admin Login</h2>
 <input id="adminId" placeholder="Admin ID" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;margin:6px 0">
-<input id="adminPw" type="password" placeholder="Password" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;margin:6px 0">
+<div class="password-wrap"><input id="adminPw" type="password" placeholder="Password"><button type="button" id="togglePassword" class="password-toggle" aria-label="Tunjuk password">👁️</button></div>
 <button class="btn primary" onclick="adminLogin()">Log Masuk Admin</button>
 <p id="adminMsg" class="small"></p>
 </section>
@@ -109,8 +150,28 @@ footer{text-align:center;color:var(--muted);padding:30px}
 <div class="stat"><b id="aWrong">0</b><span>Jawapan salah</span></div>
 <div class="stat"><b id="aXP">0</b><span>Jumlah XP tempatan</span></div>
 </div>
-<button class="btn secondary" onclick="logoutAdmin()">Log Keluar Admin</button>
+<button class="btn secondary" onclick="confirmAction('logout')">Log Keluar Admin</button>
 </section>
+
+<section id="faq" class="section">
+<h2>Soalan Lazim</h2>
+<div class="faq-list">
+<details><summary>Adakah CeriaLearn sesuai untuk Tahun 1–3?</summary><p>Ya. Kandungan Matematik disusun mengikut tahap dan topik untuk murid Tahun 1, 2 dan 3.</p></details>
+<details><summary>Bagaimana XP dan bintang berfungsi?</summary><p>Murid memperoleh XP dan bintang apabila menjawab dengan betul. Kemajuan disimpan pada peranti untuk versi ini.</p></details>
+<details><summary>Adakah pembayaran selamat?</summary><p>Pembayaran langganan dibuka melalui Stripe Checkout. CeriaLearn tidak menyimpan nombor kad pada halaman ini.</p></details>
+<details><summary>Boleh saya cuba dahulu?</summary><p>Ya. Gunakan kuiz percuma dahulu sebelum memilih pelan Parent atau Teacher.</p></details>
+</div>
+</section>
+<section id="newsletter" class="card section newsletter">
+<div><span class="badge">Ceria Update</span><h2>Dapatkan aktiviti & topik baharu ✨</h2><p class="muted">Masukkan e-mel untuk menerima kemas kini CeriaLearn.</p></div>
+<form id="newsletterForm" class="newsletter-form">
+<label class="sr-only" for="newsletterEmail">E-mel</label>
+<input id="newsletterEmail" type="email" required placeholder="nama@email.com">
+<button class="btn primary" type="submit">Daftar</button>
+</form>
+<div id="newsletterSuccess" class="success-state hidden">🎉 Berjaya! Terima kasih kerana mendaftar.</div>
+</section>
+
 </main>
 <footer>CeriaLearn • Main. Belajar. Skor. • Kandungan disusun berpandukan KSSR (Semakan 2017) / penjajaran Tahap I KPM.</footer>
 
@@ -179,4 +240,73 @@ function updateAdminStats(){
 }
 updateStats();renderTopics();document.querySelector('.grade').classList.add('selected');if(isAdmin){document.getElementById('adminPanel').classList.remove('hidden');updateAdminStats()}
 </script>
+
+<button id="topBtn" class="floating top-btn hidden" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
+<a id="contactBtn" class="floating contact-btn" href="mailto:hello@cerialearn.my?subject=CeriaLearn%20Support" aria-label="Hubungi CeriaLearn">💬</a>
+<div id="cookieBanner" class="cookie-banner hidden" role="dialog" aria-label="Pilihan kuki">
+<div><b>🍪 Kuki ringkas</b><p>Kami menggunakan storan peranti untuk menyimpan XP, tema dan pilihan anda.</p></div>
+<div class="row"><button class="btn primary" onclick="setCookieChoice('accepted')">Faham</button><button class="btn secondary" onclick="setCookieChoice('dismissed')">Tutup</button></div>
+</div>
+<div id="confirmModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+<div class="modal-card"><div class="modal-icon">⚠️</div><h3 id="confirmTitle">Anda pasti?</h3><p id="confirmText">Tindakan ini memerlukan pengesahan.</p><div class="row" style="justify-content:center"><button class="btn secondary" onclick="closeConfirm()">Batal</button><button class="btn danger" id="confirmYes">Ya, teruskan</button></div></div>
+</div>
+
+
+<script>
+(function(){
+ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+ // Theme
+ const savedTheme=localStorage.getItem('cl_theme');
+ if(savedTheme==='dark') document.body.classList.add('dark');
+ function syncTheme(){const b=$('#themeBtn'); if(b)b.textContent=document.body.classList.contains('dark')?'☀️':'🌙'}
+ $('#themeBtn')?.addEventListener('click',()=>{document.body.classList.toggle('dark');localStorage.setItem('cl_theme',document.body.classList.contains('dark')?'dark':'light');syncTheme()}); syncTheme();
+
+ // Mobile menu
+ $('#menuBtn')?.addEventListener('click',()=>{const m=$('#mobileMenu');m.classList.toggle('hidden');$('#menuBtn').setAttribute('aria-expanded',String(!m.classList.contains('hidden')))});
+ $$('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>$('#mobileMenu').classList.add('hidden')));
+
+ // Scroll progress and top button
+ const onScroll=()=>{const d=document.documentElement;const max=d.scrollHeight-d.clientHeight;$('#scrollProgress').style.width=(max?d.scrollTop/max*100:0)+'%';$('#topBtn').classList.toggle('hidden',d.scrollTop<500)};
+ addEventListener('scroll',onScroll,{passive:true});onScroll();$('#topBtn')?.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+ // Loading
+ addEventListener('load',()=>setTimeout(()=>$('#loadingOverlay')?.classList.add('done'),350));
+
+ // Search
+ const index=()=>$$('main h1,main h2,main h3,main p,.topic,.faq-list details').map((el,i)=>({el,text:(el.innerText||'').trim(),id:el.id||('search-hit-'+i)})).filter(x=>x.text.length>2);
+ const openSearch=()=>{$('#searchPanel').classList.remove('hidden');setTimeout(()=>$('#siteSearch').focus(),30)};
+ $('#searchBtn')?.addEventListener('click',openSearch);$('#closeSearch')?.addEventListener('click',()=>$('#searchPanel').classList.add('hidden'));
+ $('#searchPanel')?.addEventListener('click',e=>{if(e.target.id==='searchPanel')e.currentTarget.classList.add('hidden')});
+ $('#siteSearch')?.addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();const out=$('#searchResults');out.innerHTML='';if(!q)return;index().filter(x=>x.text.toLowerCase().includes(q)).slice(0,12).forEach(x=>{x.el.id=x.id;const a=document.createElement('a');a.className='search-result';a.href='#'+x.id;a.textContent=x.text.slice(0,120);a.onclick=()=>$('#searchPanel').classList.add('hidden');out.appendChild(a)});if(!out.children.length)out.innerHTML='<div class="search-result">Tiada hasil. Cuba kata kunci lain 🌱</div>'});
+ addEventListener('keydown',e=>{if(e.key==='Escape'){$('#searchPanel')?.classList.add('hidden');$('#mobileMenu')?.classList.add('hidden');closeConfirm()}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+
+ // Newsletter success state
+ $('#newsletterForm')?.addEventListener('submit',e=>{e.preventDefault();e.currentTarget.classList.add('hidden');$('#newsletterSuccess').classList.remove('hidden')});
+
+ // Password visibility
+ $('#togglePassword')?.addEventListener('click',()=>{const p=$('#adminPw');const show=p.type==='password';p.type=show?'text':'password';$('#togglePassword').textContent=show?'🙈':'👁️';$('#togglePassword').setAttribute('aria-label',show?'Sembunyikan password':'Tunjuk password')});
+
+ // Cookie banner
+ if(!localStorage.getItem('cl_cookie_choice')) setTimeout(()=>$('#cookieBanner')?.classList.remove('hidden'),700);
+ window.setCookieChoice=v=>{localStorage.setItem('cl_cookie_choice',v);$('#cookieBanner')?.classList.add('hidden')};
+
+ // Confirmation modal
+ let pending=null;
+ window.confirmAction=action=>{pending=action;$('#confirmText').textContent=action==='logout'?'Log keluar daripada sesi Admin?':'Teruskan tindakan ini?';$('#confirmModal').classList.remove('hidden')};
+ window.closeConfirm=()=>{$('#confirmModal')?.classList.add('hidden');pending=null};
+ $('#confirmYes')?.addEventListener('click',()=>{const a=pending;closeConfirm();if(a==='logout'&&typeof logoutAdmin==='function')logoutAdmin()});
+
+ // UTM tracking for outbound web links
+ $$('a[href^="http"]').forEach(a=>{try{const u=new URL(a.href);if(u.host!==location.host){u.searchParams.set('utm_source','cerialearn');u.searchParams.set('utm_medium','website');u.searchParams.set('utm_campaign','outbound');a.href=u.toString()}}catch(e){}});
+
+ // Copy-to-clipboard for code snippets, present or future.
+ $$('pre code').forEach(code=>{const pre=code.parentElement;pre.style.position='relative';const b=document.createElement('button');b.className='btn secondary copy-code';b.textContent='Salin';b.style.cssText='position:absolute;right:8px;top:8px;padding:7px 10px';b.onclick=async()=>{await navigator.clipboard.writeText(code.innerText);b.textContent='Disalin ✓';setTimeout(()=>b.textContent='Salin',1200)};pre.appendChild(b)});
+
+ // "Last updated" labels for post-like articles if added later.
+ $$('article').forEach(a=>{if(!a.querySelector('.last-updated')){const d=document.createElement('div');d.className='small last-updated';d.textContent='Dikemas kini: 15 September 2026';a.prepend(d)}});
+
+ // Contact mail link gets campaign context via subject; mailto itself cannot carry web UTM params.
+})();
+</script>
+
 </body></html>

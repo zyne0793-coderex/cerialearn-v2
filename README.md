@@ -1,33 +1,32 @@
-# CeriaLearn KPM Fun v3
+# CeriaLearn Polished v4 Complete
 
-Upload the CONTENTS of this ZIP to the root of your working GitHub repo.
+Vercel-ready CeriaLearn package.
 
-## Admin access (temporary)
-Admin ID: CERIA-ADMIN
-Admin Password: Ceria2474!
+## Root files
+- `index.html`
+- `404.html`
+- `updates.html`
+- `package.json`
+- `vercel.json`
+- `.env.example`
+- `api/`
 
-For production, set ADMIN_ID and ADMIN_PASSWORD in Vercel Environment Variables so the fallback credentials are not used.
+## API routes
+- `/api/create-checkout-session`
+- `/api/admin-login`
+- `/api/config`
 
-## Stripe
-This version creates MYR monthly Checkout subscriptions directly:
-- Parent RM9.90/month
-- Teacher RM29/month
+## Vercel environment variables
+Set these in Vercel, not in GitHub:
+- `STRIPE_SECRET_KEY`
+- `ADMIN_ID`
+- `ADMIN_PASSWORD`
+- `APP_URL` (optional)
+- `SUPABASE_URL` (optional for future connection)
+- `SUPABASE_PUBLISHABLE_KEY` (optional for future connection)
 
-Only STRIPE_SECRET_KEY is required in Vercel.
-Recommended:
-- APP_URL = your production Vercel URL
+Temporary admin fallback:
+- ID: `CERIA-ADMIN`
+- Password: `Ceria2474!`
 
-This build is designed for Stripe test mode first. Move to live mode only after testing.
-
-## KPM curriculum basis
-The topic structure is organized around lower-primary Mathematics domains under KSSR (Semakan 2017), with KPM's Tahap I curriculum alignment updates (Edisi 3). Questions in this MVP are original practice questions, not copied from KPM documents.
-
-## Included
-- Tahun 1, 2, 3
-- Quiz by topic
-- Cute correct/wrong animations
-- Gentle sound feedback
-- XP, stars, streak, level
-- Admin full-access panel
-- Parent/Teacher Stripe Checkout
-- Mobile-friendly UI
+For production, override the fallback credentials with Vercel environment variables.

@@ -1,6 +1,6 @@
 {
-  "name": "cerialearn-kpm-fun-v3",
-  "version": "3.0.0",
+  "name": "cerialearn-polished-v4",
+  "version": "4.0.1",
   "private": true,
   "dependencies": {
     "stripe": "^17.5.0"
